@@ -1,0 +1,73 @@
+<!Doctype html>
+
+<head><title>Countries</title>
+
+</head>
+
+<body>
+
+<form id="myForm">
+
+               <input type="search" name="search">
+
+<button type="submit" name="button" >search</button>
+
+</form>
+
+<div id="displayList" class="card">
+
+</div>
+
+<script>
+
+               const myForm=document.getElementById('myForm');
+
+myForm.addEventListener('submit',function(e)
+
+      {
+
+               e.preventDefault();
+
+         fetch('https://restcountries.eu/rest/v2/name/'+e.target.elements.search.value+'?fullText=true')
+
+  .then(function(response) {
+
+    return response.json();
+
+  })
+
+  .then(function(myJson) {
+
+               url="country.html?id="+e.target.elements.search.value;
+
+               console.log(url);
+
+               //<a href=url target="_self">
+
+               console.log(myJson[0].flag);
+
+               var content="<a href="+url+" target=\"_self\"> <div><p>"+myJson[0].name+"</p><img src="+myJson[0].flag+"></div> </a>"
+
+  document.getElementById('displayList').innerHTML= content
+
+    console.log(JSON.stringify(myJson));
+
+  })
+
+  .catch(function(error)
+
+  {
+
+               console.log(error);
+
+  })
+
+      })
+
+ 
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Page Title</title>
+
+<style>
+
+body {
+
+  background-color: black;
+
+  text-align: center;
+
+  color: white;
+
+}
+
+</style>
+
+<script type="text/javascript">
+
+               console.log("sjhdwj")
+
+               var query = window.location.search.substring(1).split("&");
+
+//            console.log(query[0]);
+
+               var param = query[0].split("=");
+
+//            console.log(param[1]);
+
+ 
+
+  fetch('https://restcountries.eu/rest/v2/name/'+param[1]+'?fullText=true')
+
+  .then(function(response) {
+
+    return response.json();
+
+  })
+
+  .then(function(myJson) {
+
+               url="country.html?id="+param[1];
+
+               console.log(url);
+
+               //<a href=url target="_self">
+
+               console.log(myJson[0].region);
+
+               console.log(myJson[0].subregion);
+
+               console.log(myJson[0].population);
+
+ 
+
+ 
+
+  //         var content="<a href="+url+" target=\"_self\"> <div><img src="+myJson[0].flag+"></div> </a>"
+
+               var content = "<p>Region : "+myJson[0].region+" <br> Subregion : "+myJson[0].subregion+" <br> Population : "+myJson[0].population+" </p>"
+
+  document.getElementById('displayList').innerHTML= content;
+
+  })
+
+  .catch(function(error)
+
+  {
+
+               console.log(error);
+
+  })
+
+ 
+
+</script>
+
+</head>
+
+<body>
+
+<div id="displayList">
+
+              
+
+</div>
+
+</body>
+
+</html>
+
+ 
